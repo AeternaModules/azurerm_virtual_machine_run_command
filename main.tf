@@ -1,3 +1,8 @@
+data "azurerm_key_vault_secret" "run_as_password" {
+  for_each     = { for k, v in var.virtual_machine_run_commands : k => v if v.run_as_password_key_vault_id != null && v.run_as_password_key_vault_secret_name != null }
+  name         = each.value.run_as_password_key_vault_secret_name
+  key_vault_id = each.value.run_as_password_key_vault_id
+}
 resource "azurerm_virtual_machine_run_command" "virtual_machine_run_commands" {
   for_each = var.virtual_machine_run_commands
 
@@ -6,7 +11,7 @@ resource "azurerm_virtual_machine_run_command" "virtual_machine_run_commands" {
   virtual_machine_id = each.value.virtual_machine_id
   error_blob_uri     = each.value.error_blob_uri
   output_blob_uri    = each.value.output_blob_uri
-  run_as_password    = each.value.run_as_password
+  run_as_password    = each.value.run_as_password != null ? each.value.run_as_password : try(data.azurerm_key_vault_secret.run_as_password[each.key].value, null)
   run_as_user        = each.value.run_as_user
   tags               = each.value.tags
 

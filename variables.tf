@@ -16,6 +16,8 @@ Optional:
     - error_blob_uri
     - output_blob_uri
     - run_as_password
+    - run_as_password_key_vault_id (alternative to run_as_password - read from Key Vault instead)
+    - run_as_password_key_vault_secret_name (alternative to run_as_password - read from Key Vault instead)
     - run_as_user
     - tags
     - error_blob_managed_identity (block):
@@ -33,14 +35,16 @@ Optional:
 EOT
 
   type = map(object({
-    location           = string
-    name               = string
-    virtual_machine_id = string
-    error_blob_uri     = optional(string)
-    output_blob_uri    = optional(string)
-    run_as_password    = optional(string)
-    run_as_user        = optional(string)
-    tags               = optional(map(string))
+    location                              = string
+    name                                  = string
+    virtual_machine_id                    = string
+    error_blob_uri                        = optional(string)
+    output_blob_uri                       = optional(string)
+    run_as_password                       = optional(string)
+    run_as_password_key_vault_id          = optional(string)
+    run_as_password_key_vault_secret_name = optional(string)
+    run_as_user                           = optional(string)
+    tags                                  = optional(map(string))
     source = object({
       command_id = optional(string)
       script     = optional(string)
