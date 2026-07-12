@@ -1,3 +1,7 @@
+output "virtual_machine_run_commands_id" {
+  description = "Map of id values across all virtual_machine_run_commands, keyed the same as var.virtual_machine_run_commands"
+  value       = { for k, v in azurerm_virtual_machine_run_command.virtual_machine_run_commands : k => v.id }
+}
 output "virtual_machine_run_commands_error_blob_managed_identity" {
   description = "Map of error_blob_managed_identity values across all virtual_machine_run_commands, keyed the same as var.virtual_machine_run_commands"
   value       = { for k, v in azurerm_virtual_machine_run_command.virtual_machine_run_commands : k => v.error_blob_managed_identity }
