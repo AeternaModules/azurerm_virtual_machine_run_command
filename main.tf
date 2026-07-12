@@ -40,7 +40,7 @@ resource "azurerm_virtual_machine_run_command" "virtual_machine_run_commands" {
   }
 
   dynamic "parameter" {
-    for_each = each.value.parameter != null ? [each.value.parameter] : []
+    for_each = each.value.parameter != null ? each.value.parameter : []
     content {
       name  = parameter.value.name
       value = parameter.value.value
@@ -48,7 +48,7 @@ resource "azurerm_virtual_machine_run_command" "virtual_machine_run_commands" {
   }
 
   dynamic "protected_parameter" {
-    for_each = each.value.protected_parameter != null ? [each.value.protected_parameter] : []
+    for_each = each.value.protected_parameter != null ? each.value.protected_parameter : []
     content {
       name  = protected_parameter.value.name
       value = protected_parameter.value.value

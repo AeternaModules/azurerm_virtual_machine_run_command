@@ -58,14 +58,14 @@ EOT
       client_id = optional(string)
       object_id = optional(string)
     }))
-    parameter = optional(object({
+    parameter = optional(list(object({
       name  = string
       value = string
-    }))
-    protected_parameter = optional(object({
+    })))
+    protected_parameter = optional(list(object({
       name  = string
       value = string
-    }))
+    })))
   }))
 }
 
