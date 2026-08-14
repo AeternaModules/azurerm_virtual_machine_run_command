@@ -4,7 +4,7 @@ output "virtual_machine_run_commands_id" {
 }
 output "virtual_machine_run_commands_error_blob_managed_identity" {
   description = "Map of error_blob_managed_identity values across all virtual_machine_run_commands, keyed the same as var.virtual_machine_run_commands"
-  value       = { for k, v in azurerm_virtual_machine_run_command.virtual_machine_run_commands : k => v.error_blob_managed_identity if v.error_blob_managed_identity != null && length(v.error_blob_managed_identity) > 0 }
+  value       = { for k, v in azurerm_virtual_machine_run_command.virtual_machine_run_commands : k => one(v.error_blob_managed_identity) if v.error_blob_managed_identity != null && length(v.error_blob_managed_identity) > 0 }
   sensitive   = true
 }
 output "virtual_machine_run_commands_error_blob_uri" {
@@ -25,7 +25,7 @@ output "virtual_machine_run_commands_name" {
 }
 output "virtual_machine_run_commands_output_blob_managed_identity" {
   description = "Map of output_blob_managed_identity values across all virtual_machine_run_commands, keyed the same as var.virtual_machine_run_commands"
-  value       = { for k, v in azurerm_virtual_machine_run_command.virtual_machine_run_commands : k => v.output_blob_managed_identity if v.output_blob_managed_identity != null && length(v.output_blob_managed_identity) > 0 }
+  value       = { for k, v in azurerm_virtual_machine_run_command.virtual_machine_run_commands : k => one(v.output_blob_managed_identity) if v.output_blob_managed_identity != null && length(v.output_blob_managed_identity) > 0 }
   sensitive   = true
 }
 output "virtual_machine_run_commands_output_blob_uri" {
@@ -52,7 +52,7 @@ output "virtual_machine_run_commands_run_as_user" {
 }
 output "virtual_machine_run_commands_source" {
   description = "Map of source values across all virtual_machine_run_commands, keyed the same as var.virtual_machine_run_commands"
-  value       = { for k, v in azurerm_virtual_machine_run_command.virtual_machine_run_commands : k => v.source if v.source != null && length(v.source) > 0 }
+  value       = { for k, v in azurerm_virtual_machine_run_command.virtual_machine_run_commands : k => one(v.source) if v.source != null && length(v.source) > 0 }
   sensitive   = true
 }
 output "virtual_machine_run_commands_tags" {
